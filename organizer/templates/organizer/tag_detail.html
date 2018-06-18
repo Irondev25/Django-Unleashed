@@ -1,0 +1,47 @@
+{% extends parent_template|default:"organizer/base_organizer.html" %}
+{% block title %}
+{{block.super}} - {{tag.name|title}}
+{% endblock title %}
+{% block content %}
+<h2>{{tag.name|title}}</h2>
+<table>
+    <tr>
+        <th>
+            <button class="btn btn-sm btn-outline-primary">
+                <a href="{{tag.get_update_url}}">Edit Tag</a>
+            </button>
+        </th>
+        <th>
+            <button class="btn btn-sm btn-outline-danger">
+                <a href="{{tag.get_delete_url}}">Delete</a>
+            </button>
+        </th>
+    </tr>
+</table>
+{% if tag.startups.all %}
+<section>
+    <h3>Startup{{tag.startups.count|pluralize}}</h3>
+    <p>This tag is associated with {{tag.startups.count}} startup{{tag.startups.count|pluralize}}</p>
+    <ul>
+        {% for startup in tag.startups.all %}
+        <li>
+            <a href="{{startup.get_absolute_url}}">{{startup.name}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %} {% if tag.blog_posts.all %}
+<section>
+    <h3>Blog Post{{tag.blog_posts.count|pluralize}}</h3>
+    <ul>
+        {% for post in tag.blog_posts.all %}
+        <li>
+            <a href="{{post.get_absolute_url}}">{{post.title|title}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %} {% if not tag.startups.all or tag.blog_posts.all %}
+<p>This tag is not releted to any content.</p>
+{% else %} {% endif %}
+{% endblock content %}

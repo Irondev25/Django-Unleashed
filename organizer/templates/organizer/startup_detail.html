@@ -1,0 +1,81 @@
+{% extends parent_template|default:'organizer/base_organizer.html' %}
+{% block title %}
+{{block.super}} - {{startup.name}}
+{% endblock title %}
+{% block content %}
+<article>
+    <h2>{{startup.name}}</h2>
+    <table>
+        <tr>
+            <th>
+                <button class="btn btn-sm btn-outline-primary">
+                    <a href="{{startup.get_update_url}}">Update Startup</a>
+                </button>
+            </th>
+            <th>
+                <button class="btn btn-sm btn-outline-danger">
+                    <a href="{{startup.get_delete_url}}">Delete</a>
+                </button>
+            </th>
+        </tr>
+    </table>
+    <dl>
+        <dt>Date Founded</dt>
+        <dd>{{startup.founded_date|date:"jS F Y"}}</dd>
+        <dt>Website</dt>
+        <dd>{{startup.website}}</dd>
+        <dt>Contact</dt>
+        <dd>{{startup.contact}}</dd>
+        <dt>Tag{{startup.tags.count|pluralize}}</dt>
+        {% for tag in startup.tags.all %}
+        <dd>
+            <a href="{{tag.get_absolute_url}}">{{tag.name|title}}</a>
+        </dd>
+        {% empty %} {% endfor %}
+    </dl>
+
+    <p>
+        {{startup.description|linebreaks}}
+    </p>
+    <p>
+        <a href="{% url 'organizer_newslink:create' %}">Add Article</a>
+    </p>
+    {% if startup.newslink_set.all %}
+    <section>
+        <h3>Recent News</h3>
+        <ul>
+            {% for newslink in startup.newslink_set.all %}
+            <li>
+                <a href="{{newslink.link}}">{{newslink.title}}</a>
+                <table>
+                    <tr>
+                        <th>
+                            <button class="btn btn-sm btn-outline-primary">
+                                <a href="{{newslink.get_update_url}}">Update Newslink</a>
+                            </button>
+                        </th>
+                        <th>
+                            <button class="btn btn-sm btn-outline-danger">
+                                <a href="{{newslink.get_delete_url}}">Delete</a>
+                            </button>
+                        </th>
+                    </tr>
+                </table>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endif %} {% if startup.blog_posts.all %}
+    <section>
+        <h3>Blog Post{{startup.blog_posts.count|pluralize}}</h3>
+        <ul>
+            {% for post in startup.blog_posts.all %}
+            <li>
+                <a href="{{post.get_absolute_url}}">{{post.title|title}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% else %} {% endif %}
+</article>
+{% endblock content %}
