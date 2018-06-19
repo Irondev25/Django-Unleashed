@@ -18,4 +18,22 @@
     </p>
     {% endfor %}
 </ul>
+{% if is_paginated %}
+<div class="row">
+    <div class="col-sm-4">
+        {% if previous_page_url %}
+        <a href="{{previous_page_url}}">Previous</a>
+        {% endif %}
+    </div>
+    <div class="col-sm-4">
+        Page {{tag_list.number}} of {{paginator.num_pages}}
+    </div>
+    <div class="col-sm-4">
+        {% if next_page_url %}
+        <a href="{{next_page_url}}">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% else %}
+{% endif %}
 {% endblock content %}
