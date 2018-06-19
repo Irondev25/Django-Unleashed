@@ -9,8 +9,8 @@
         <form action="{{startup.get_delete_url}}" method="post">
             {% csrf_token %}
             <p>Are you sure you want to delete startup {{startup.name}}?</p>
-            <button class="btn btn-primary"><a href="{{startup.get_absolute_url}}">Cancle</a></button>
-            <button type="submit" class="btn btn-danger">Delete Startup</button>
+            <button class="btn btn-outline-primary"><a href="{{startup.get_absolute_url}}">Cancle</a></button>
+            <button type="submit" class="btn btn-outline-danger">Delete Startup</button>
         </form>
     </div>
 </div>

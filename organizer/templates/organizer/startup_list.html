@@ -31,4 +31,29 @@
     </li>
     {% endfor %}
 </ul>
+
+
+{% if is_paginated %}
+<div class="row">
+    <div class="col-sm-4">
+        {% if previous_page_url %}
+        <p>
+            <a href="{{previous_page_url}}">Previous</a>
+        </p>
+        {% endif %}
+    </div>
+    <div class="col-sm-4">
+        <p>
+            Page {{startup_list.number}} of {{paginator.num_pages}}
+        </p>
+    </div>
+    <div class="col-sm-4">
+        {% if next_page_url %}
+        <p>
+            <a href="{{next_page_url}}">Next</a>
+        </p>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
 {% endblock content %}
