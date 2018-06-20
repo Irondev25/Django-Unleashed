@@ -1,4 +1,6 @@
 <!doctype html>
+{% load flatpages %}
+{% get_flatpages as flatpages %}
 <html lang="en">
 
 <head>
@@ -15,6 +17,41 @@
         Startup Organizer
         {% endblock title %}
     </title>
+
+    <style>
+        html {
+            height: 100%;
+            box-sizing: border-box;
+            }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {  
+        position: relative;
+        margin: 0;
+        padding-bottom: 6rem;
+        min-height: 100%;
+        }
+        /**
+        * Footer Styles
+        */
+
+        .footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        background-color: #343A40;
+        text-align: center;
+        color: white;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -39,6 +76,11 @@
                     <li class="nav-item">
                         <a href="{% url 'contact:contact' %}" class="nav-link">Contact Us</a>
                     </li>
+                    {% for page in flatpages %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{page.get_absolute_url}}">{{page.title}}</a>
+                    </li> 
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -71,11 +113,11 @@
         </main>
     </div>
 
-    <footer>
+    <footer class="footer">
         <p>
-            &copy; 2015
-            <a href="https://AndrewsForge.com/">
-            Andrew Pinkham</a>
+            &copy; 2018
+            <a href="#">
+            Rahul Bhaskar</a>
         </p>
         <p>
             Created for

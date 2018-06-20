@@ -19,15 +19,16 @@ class TagList(View):
     model = Tag
 
     def get(self, request):
-        tags = self.model.objects.all()
-        context = {
-            'tag_list': tags
-        }
-        return render(
-            request,
-            self.template_name,
-            context
-        )
+        # tags = self.model.objects.all()
+        # context = {
+        #     'tag_list': tags
+        # }
+        # return render(
+        #     request,
+        #     self.template_name,
+        #     context
+        # )
+        return redirect('organizer_tag:page', page_number=1)
 
 class TagPageList(View):
     template_name = 'organizer/tag_list.html'

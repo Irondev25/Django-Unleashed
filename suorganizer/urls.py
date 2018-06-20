@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^newslink/', include(newslink_urls)),
     url(r'^tag/', include(tag_urls)),
     url(r'^contact/', include(contact_urls)),
+    url(r'^', include('django.contrib.flatpages.urls')),
 ]
