@@ -8,9 +8,6 @@ from .forms import TagForm, NewslinkForm, StartupForm
 from .utils import ObjectCreateMixin, ObjectUpdateMixin, ObjectDeleteMixin
 
 
-
-
-
 #views relate to Tag.
 # def tag_list(request):
 #     return render(request, 'organizer/tag_list.html', {'tag_list': Tag.objects.all()})

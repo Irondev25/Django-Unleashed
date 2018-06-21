@@ -1,1 +1,7 @@
 {% extends parent_template|default:'base.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'blog/style.css' %}">
+{% endblock head %}

@@ -1,8 +1,8 @@
 <!doctype html>
 {% load flatpages %}
+{% load staticfiles %}
 {% get_flatpages as flatpages %}
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -12,45 +12,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
 
+    <link rel="stylesheet" href="{% static 'site/style.css' %}">
+    
+    {% block head %}
+    
+    {% endblock head %}
     <title>
         {% block title %}
         Startup Organizer
         {% endblock title %}
     </title>
-
-    <style>
-        html {
-            height: 100%;
-            box-sizing: border-box;
-            }
-
-        *,
-        *:before,
-        *:after {
-            box-sizing: inherit;
-        }
-
-        body {  
-        position: relative;
-        margin: 0;
-        padding-bottom: 6rem;
-        min-height: 100%;
-        }
-        /**
-        * Footer Styles
-        */
-
-        .footer {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        padding: 1rem;
-        background-color: #343A40;
-        text-align: center;
-        color: white;
-        }
-    </style>
 
 </head>
 
@@ -99,8 +70,6 @@
             </ul>
         </div>
     </div>
-    
-    {% else %}
     {% endif %}
     <div class="container">
         <header>
