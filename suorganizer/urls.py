@@ -16,19 +16,24 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from .views import redirect_root
 from contact import urls as contact_urls
 from organizer.urls import newslink as newslink_urls
 from organizer.urls import startup as startup_urls
 from organizer.urls import tag as tag_urls
+from django.views.generic import (RedirectView, TemplateView)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', redirect_root, name='homepage'),
+    url(r'^$', RedirectView.as_view(
+        pattern_name='blog:post_list',
+        permanent=False
+    ), name='index'),
     url(r'^blog/', include('blog.urls')),
     url(r'^startup/', include(startup_urls)),
     url(r'^newslink/', include(newslink_urls)),
     url(r'^tag/', include(tag_urls)),
     url(r'^contact/', include(contact_urls)),
-    url(r'^', include('django.contrib.flatpages.urls')),
+    url(r'^about/$', TemplateView.as_view(
+        template_name='site/about.html'
+    ), name='about_site'),
 ]

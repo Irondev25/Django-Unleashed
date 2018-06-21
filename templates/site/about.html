@@ -1,0 +1,11 @@
+{% extends parent_template|default:"base.html" %}
+
+{% block title %}
+{{ block.super }} - About
+{% endblock title %}
+
+{% block content %}
+This website is built in Django, and is the basis of the code in the book Django Unleashed, written by Andrew Pinkham. <br>
+The site design is based on the CSS boilerplate bootstrap, and makes use of HTML from HTML5 Boilerplate as well as Harry Robert's
+HTML5 boilerplate.
+{% endblock content %}

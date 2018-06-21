@@ -1,19 +1,23 @@
 {% extends parent_template|default:"organizer/base_organizer.html" %}
+{% load staticfiles %}
 {% block title %}
 {{block.super}} - {{tag.name|title}}
 {% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'organizer/style.css' %}">
+{% endblock head %}
 {% block content %}
 <h2>{{tag.name|title}}</h2>
 <table>
     <tr>
         <th>
             <button class="btn btn-sm btn-outline-primary">
-                <a href="{{tag.get_update_url}}">Edit Tag</a>
+                <a class="white-hover" href="{{tag.get_update_url}}">Edit Tag</a>
             </button>
         </th>
         <th>
             <button class="btn btn-sm btn-outline-danger">
-                <a href="{{tag.get_delete_url}}">Delete</a>
+                <a class="white-hover" href="{{tag.get_delete_url}}">Delete</a>
             </button>
         </th>
     </tr>

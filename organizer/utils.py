@@ -3,22 +3,6 @@ from django.http import HttpResponseRedirect
 from django import forms
 from django.views.generic import View
 
-class ObjectCreateMixin(View):
-    form_class = None
-    template_name = ''
-
-    def get(self, request):
-        unbound_form = self.form_class()
-        return render(request, self.template_name, {'form': unbound_form})
-
-    def post(self, request):
-        bound_form = self.form_class(request.POST)
-        if bound_form.is_valid():
-            new_object = bound_form.save()
-            return redirect(new_object)
-        else:
-            return render(request, self.template_name, {'form': bound_form})
-
 
 class ObjectUpdateMixin(View):
     template_name = ''
@@ -72,3 +56,4 @@ class SlugCleanMixin:
         if new_slug == 'create':
             raise forms.ValidationError("Slug can't be 'create'.")
         return new_slug
+

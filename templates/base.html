@@ -1,7 +1,5 @@
 <!doctype html>
-{% load flatpages %}
 {% load staticfiles %}
-{% get_flatpages as flatpages %}
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -47,11 +45,9 @@
                     <li class="nav-item">
                         <a href="{% url 'contact:contact' %}" class="nav-link">Contact Us</a>
                     </li>
-                    {% for page in flatpages %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{page.get_absolute_url}}">{{page.title}}</a>
+                        <a class="nav-link" href="{% url 'about_site' %}">{{page.title}}</a>
                     </li> 
-                    {% endfor %}
                 </ul>
             </div>
         </div>
