@@ -1,0 +1,86 @@
+{% extends parent_template|default:"blog/base_blog.html" %}
+{% load staticfiles %}
+
+{% block title %}
+{{ block.super }} - {{year|date:"Y"}} Posts
+{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'blog/style.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-8">
+        <h2>All post for {{year|date:"Y"}}</h2>
+        {% for post in post_list %}
+        <article class="post">
+            <header>
+                <h3>
+                    <a href="{{post.get_absolute_url}}">
+                        {{post.title|title}}
+                    </a>
+                </h3>
+                <p>
+                    Written on:
+                    <time datetime="{{post.pub_date|date:"Y-m-d"}}">
+                        {{post.pub_date|date:"l, F j, Y"}}
+                    </time>
+                </p>
+            </header>
+            <p>{{post.text|truncatewords:20}}</p>
+            <p class="read-more">
+                <a href="{{post.get_absolute_url}">
+                    Read more&hellip;
+                </a>
+            </p>
+            <div>
+                <table>
+                    <tr>
+                        <th><button class="btn btn-sm btn-outline-primary">
+                            <a class="white-hover" href="{{post.get_update_url}}">Edit Post</a>
+                        </button></th>
+                        <th>
+                            <button class="btn btn-sm btn-outline-danger">
+                                <a class="white-hover" href="{{post.get_delete_url}}">Delete Post</a>
+                            </button>
+                        </th>
+                    </tr> 
+                </table>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    <div class="col-sm-4">
+        <h3>Archive by Month</h3>
+        <ul>
+            {% for m in date_list %}
+            <li>
+                <a href="{% url 'blog:post_archive_month' m|date:"Y" m|date:"n" %}">
+                    {{m|date:"F Y"}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div class="control">
+    <div class="row">
+        <div class="col-sm-4">
+            {% if previous_year %}
+            <a href="{% url "blog:post_archive_year" previous_year|date:"Y" %}">
+                Previous Year
+            </a>
+            {% endif %}
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            {% if next_year %}
+            <a href="{% url "blog:post_archive_year" next_year|date:"Y" %}">
+                Next Year
+            </a>
+            {% else %} {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
