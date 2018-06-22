@@ -3,46 +3,62 @@
 {{ block.super }} - Post List
 {% endblock title %}
 {% block content %}
-<div>
-    <a href="{% url 'blog:post_create' %}">Write a new Post</a>
-</div>
-{% for post in post_list %}
-<article>
-    <header>
-        <h2>
-            <a href="{{post.get_absolute_url}}">{{post.title|title}}</a>
-        </h2>
-        <p>
-            Written on:
-            <time datetime="{{post.pub_date|date:'Y-m-d'}}">
-                {{post.pub_date|date:"l, F j, Y"}}
-            </time>
-        </p>
-        <table>
-            <tr>
-                <th>
-                    <button class="btn btn-sm btn-outline-primary">
-                        <a href="{{post.get_update_url}}">Edit Post</a>
-                    </button>
-                </th>
-                <th>
-                    <button class="btn btn-sm btn-outline-danger">
-                        <a href="{{post.get_delete_url}}">Delete</a>
-                    </button>
-                </th>
-            </tr>
-        </table>
+<div class="row">
+    <div class="col-sm-8 post-list">
+        <div>
+            <a href="{% url 'blog:post_create' %}">Write a new Post</a>
+        </div>
+        {% for post in post_list %}
+        <article>
+            <header>
+                <h2>
+                    <a href="{{post.get_absolute_url}}">{{post.title|title}}</a>
+                </h2>
+                <p>
+                    Written on:
+                    <time datetime="{{post.pub_date|date:'Y-m-d'}}">
+                        {{post.pub_date|date:"l, F j, Y"}}
+                    </time>
+                </p>
+                <table>
+                    <tr>
+                        <th>
+                            <button class="btn btn-sm btn-outline-primary">
+                                <a href="{{post.get_update_url}}">Edit Post</a>
+                            </button>
+                        </th>
+                        <th>
+                            <button class="btn btn-sm btn-outline-danger">
+                                <a href="{{post.get_delete_url}}">Delete</a>
+                            </button>
+                        </th>
+                    </tr>
+                </table>
         
-    </header>
-
-    <p>{{post.text|truncatewords:20}}</p>
-    <p>
-        <a href="{{post.get_absolute_url}}">Read more&hellip;</a>
-    </p>
-</article>
-{% empty %}
-<p>
-    <em>No Blog Posts Available</em>
-</p> 
-{% endfor %}
+            </header>
+        
+            <p>{{post.text|truncatewords:20}}</p>
+            <p>
+                <a href="{{post.get_absolute_url}}">Read more&hellip;</a>
+            </p>
+        </article>
+        {% empty %}
+        <p>
+            <em>No Blog Posts Available</em>
+        </p>
+        {% endfor %}
+    </div>
+    <div class="col-sm-4 archive">
+        <h3>Post Archives:</h3>
+        <ul>
+            {% for y in date_list %}
+            <li>
+                <a href="{% url 'blog:post_archive_year' y|date:"Y" %}">
+                    {{y|date:"Y"}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock content %}

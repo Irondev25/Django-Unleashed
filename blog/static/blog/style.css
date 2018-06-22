@@ -1,0 +1,8 @@
+.white-hover:hover {
+    color: white;
+    text-decoration: None;
+}
+
+.control {
+    margin-top: 20px;
+}
